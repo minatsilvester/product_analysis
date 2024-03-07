@@ -20,6 +20,7 @@ defmodule ProductAnalysisWeb.Router do
     get "/", PageController, :home
     post "/events", EventsController, :create
     get "/user_analytics", EventsController, :get_user_analytics
+    get "/event_analytics", EventsController, :get_event_analytics
   end
 
   # Other scopes may use custom stacks.

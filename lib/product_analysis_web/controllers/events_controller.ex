@@ -14,6 +14,13 @@ defmodule ProductAnalysisWeb.EventsController do
   def get_user_analytics(conn, _) do
     list = Entries.get_user_analytics(conn.query_params)
     {:ok, resp} = Jason.encode(list)
-    conn |> send_resp(200, resp) |> put_resp_content_type("application/json")
+    conn|> put_resp_content_type("application/json") |> send_resp(200, resp)
+  end
+
+  def get_event_analytics(conn, _) do
+    list = Entries.get_event_analytics(conn.query_params)
+    IO.inspect(list)
+    {:ok, resp} = Jason.encode(list)
+    conn|> put_resp_content_type("application/json") |> send_resp(200, resp)
   end
 end
