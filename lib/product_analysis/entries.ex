@@ -27,10 +27,10 @@ defmodule ProductAnalysis.Entries do
 
   def get_base_query_for_event_analytics(query_params) do
     Enum.reduce(query_params, Event, fn
-      {"from", from} -> from(e in Event, where: e.event_time >= ^from)
-      {"to", to} -> from(e in Event, where: e.event_time <= ^to)
-      {"event_name", event_name} -> from(e in Event, where: e.event_name == ^event_name)
-      _ -> Event
+      {"from", from}, query -> from(e in query, where: e.event_time >= ^from)
+      {"to", to}, query -> from(e in query, where: e.event_time <= ^to)
+      {"event_name", event_name}, query -> from(e in query, where: e.event_name == ^event_name)
+      _, query -> query
     end)
   end
 
@@ -49,6 +49,4 @@ defmodule ProductAnalysis.Entries do
       event -> from(e in Event, where: e.event_name == ^event)
     end
   end
-
-
 end
